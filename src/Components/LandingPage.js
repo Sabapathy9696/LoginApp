@@ -11,16 +11,15 @@ export default function LandingPage() {
   const [password, setPassWord] = useState('')
   const [userType, setUserType] = useState('')
 
-  const handleUserTypeChange = e => {
-    setUserType(e.target.value)
-  }
-  
-  const handleUserNameChange = e => {
-    setUserName(e.target.value)
-  }
-
-  const handlePasswordChange = e => {
-    setPassWord(e.target.value)
+  const handleChange = e => {
+    const { name, value } = e.target
+    if (name === 'userName') {
+      setUserName(value)
+    } else if (name === 'password') {
+      setPassWord(value)
+    } else if (name === 'userType') {
+      setUserType(value)
+    }
   }
 
   const handleSubmit = e => {
@@ -48,13 +47,13 @@ export default function LandingPage() {
    <div>
      <form onSubmit={handleSubmit}>
         <div className='margin'>
-          <input type="text" placeholder='User Name' required value={userName} onChange={handleUserNameChange}/>
+          <input type="text" name="userName" placeholder='User Name' required value={userName} onChange={handleChange}/>
         </div>
         <div className='margin'>
-          <input type="text" placeholder='Password' required value={password} onChange={handlePasswordChange}/>
+          <input type="text" name="password" placeholder='Password' required value={password} onChange={handleChange}/>
         </div>  
         <div className='margin'>  
-         <select value={userType} onChange={handleUserTypeChange}>
+         <select name="userType" value={userType} onChange={handleChange}>
            <option>Select User Type</option>
            <option value="2">HR</option>
            <option value="3">Admin</option>

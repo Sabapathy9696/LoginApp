@@ -6,17 +6,27 @@ export default function HRPage() {
 
   const {id} = useParams() 
   const [data, setData] = useState("")
+  const [ids, setIds] = useState("")
 
   useEffect(() => {
+    axios.get('http://192.168.2.74/Employee/All')
+    .then(res => {
+      console.log(res.data)
+      setData(res.data)
+    })
+    .catch(err => console.log(err))
+  },[])
+  
+  useEffect(() => {
     axios.get(`http://192.168.2.74/Employee/${id}`)
-    .then(res => setData(res.data))
+    .then(res => setIds(res.data))
     .catch(err => console.log(err))
   },[id])
-
+  
   return (
     <div>
         <p>Hr</p>
-        <h3>Welcome {data.firstName}</h3>
+        {data && <h3>Welcome {ids.firstName}</h3>}
     </div>
-  )
+  ) 
 }
