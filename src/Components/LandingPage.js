@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import '../App.css'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 export default function LandingPage() {
+
+  const navigate = useNavigate()
 
   const [userName, setUserName] = useState('')
   const [password, setPassWord] = useState('')
@@ -11,7 +14,7 @@ export default function LandingPage() {
   const handleUserTypeChange = e => {
     setUserType(e.target.value)
   }
-
+  
   const handleUserNameChange = e => {
     setUserName(e.target.value)
   }
@@ -27,7 +30,17 @@ export default function LandingPage() {
       password: password,
       userName: userName
     })
-    .then(res => res.json)
+    .then((res) => {
+      if(userType === "1") {
+        navigate(`/user/${res.data}`)
+      }
+      else if(userType === "2") {
+        navigate(`/hr/${res.data}`) 
+      }
+      else {
+        navigate(`/admin/${res.data}`)
+      }
+    })
     .catch(err => console.log(err))
   }
 

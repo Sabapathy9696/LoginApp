@@ -2,9 +2,9 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-export default function UserPage() {
+export default function HRPage() {
 
-  const { id } = useParams()  
+  const {id} = useParams() 
   const [data, setData] = useState("")
 
   useEffect(() => {
@@ -15,8 +15,8 @@ export default function UserPage() {
 
   return (
     <div>
-        <p>UserPage</p>
-        <h3>Hi {data.firstName}</h3>
+        <p>Hr</p>
+        <h3>Welcome {data.firstName}</h3>
     </div>
   )
 }
